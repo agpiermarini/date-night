@@ -8,18 +8,55 @@ class BinarySearchTreeTest < Minitest::Test
     assert_instance_of BinarySearchTree, tree
   end
 
-  def test_it_initializes_with_root_node
-    tree = BinarySearchTree.new
-    assert_instance_of Node, tree.root
-  end
-
-  def test_root_node_initializes_with_score_title_nil
-    tree = BinarySearchTree.new
-    assert_nil tree.root.title
-    assert_nil tree.root.score
-  end
+  # def test_it_initializes_with_root_nil
+  #   tree = BinarySearchTree.new
+  #   assert_nil tree.root
+  # end
 
   def test_can_insert_node
     tree = BinarySearchTree.new
+    tree.insert(61, "Bill & Ted's Excellent Adventure")
+
+    assert_equal 61, tree.root.score
+    assert_equal "Bill & Ted's Excellent Adventure", tree.root.title
+  end
+
+  def test_insert_returns_depth_of_node
+    tree = BinarySearchTree.new
+    assert_equal 0, tree.insert(61, "Bill & Ted's Excellent Adventure")
+  end
+
+  def test_can_insert_second_node
+    tree = BinarySearchTree.new
+    assert_equal 0, tree.insert(61, "Bill & Ted's Excellent Adventure")
+    assert_equal 1, tree.insert(16, "Johnny English")
+    assert_equal 16, tree.root.left.score
+    assert_equal "Johnny English", tree.root.left.title
+  end
+
+  def test_can_insert_more_than_two_nodes
+    tree = BinarySearchTree.new
+    assert_equal 0, tree.insert(61, "Bill & Ted's Excellent Adventure")
+    assert_equal 1, tree.insert(16, "Johnny English")
+    assert_equal 1, tree.insert(92, "Sharknado 3")
+    assert_equal 92, tree.root.right.score
+    assert_equal "Sharknado 3", tree.root.right.title
+    assert_equal 2, tree.insert(50, "Hannibal Buress: Animal Furnace")
+    assert_equal 50, tree.root.left.right.score
+    assert_equal "Hannibal Buress: Animal Furnace", tree.root.left.right.title
+  end
+
+  def test_it_can_find_depth_of_score
+    tree = BinarySearchTree.new
+    tree.insert(61, "Bill & Ted's Excellent Adventure")
+    tree.insert(16, "Johnny English")
+    tree.insert(92, "Sharknado 3")
+    tree.insert(50, "Hannibal Buress: Animal Furnace")
+
+    assert_equal 0, tree.depth_of(61)
+    assert_equal 1, tree.depth_of(16)
+    assert_equal 1, tree.depth_of(92)
+    assert_equal 2, tree.depth_of(50)
+    assert_nil tree.depth_of(1000)
   end
 end
