@@ -121,4 +121,10 @@ class BinarySearchTreeTest < Minitest::Test
     assert_instance_of Array, tree.sort
     assert_equal expected, tree.sort
   end
+
+  def test_load
+    tree = BinarySearchTree.new
+
+    assert_equal 100, tree.load('./data/movies.txt')
+  end
 end

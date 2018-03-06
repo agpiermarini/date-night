@@ -1,6 +1,8 @@
 require './lib/node'
+require './lib/file_parser'
 
 class BinarySearchTree
+  include FileParser
   attr_reader :root
   def initialize
     @root = nil
@@ -41,7 +43,8 @@ class BinarySearchTree
     depth_of(score)
   end
 
-  def depth_of(score, node = @root)
+  def depth_of(score)
+    node = @root
     depth = 0
     until score == node.score
       depth += 1
@@ -51,7 +54,8 @@ class BinarySearchTree
     depth
   end
 
-  def include?(score, node = @root)
+  def include?(score)
+    node = @root
     loop do
       return true if score == node.score
       score < node.score ? (node = node.left) : (node = node.right)
@@ -83,7 +87,8 @@ class BinarySearchTree
     end
   end
 
-  def find_by_score(score, node = @root)
+  def find_by_score(score)
+    node = @root
     loop do
       return node if score == node.score
       score < node.score ? (node = node.left) : (node = node.right)
@@ -96,5 +101,14 @@ class BinarySearchTree
       node = find_by_score(score)
       node.nil? ? nil : { node.title => node.score }
     end.compact
+  end
+
+  def load(file)
+    movies = parse_txt(file)
+    movies.each do |movie|
+      score, title = movie.split(", ")
+      insert(score, title.strip)
+    end
+    movies.length
   end
 end
