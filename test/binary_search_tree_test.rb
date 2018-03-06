@@ -59,4 +59,34 @@ class BinarySearchTreeTest < Minitest::Test
     assert_equal 2, tree.depth_of(50)
     assert_nil tree.depth_of(1000)
   end
+
+  def test_include_method
+    tree = BinarySearchTree.new
+    tree.insert(61, "Bill & Ted's Excellent Adventure")
+    tree.insert(16, "Johnny English")
+    tree.insert(92, "Sharknado 3")
+    tree.insert(50, "Hannibal Buress: Animal Furnace")
+
+    assert tree.include?(61)
+    assert tree.include?(16)
+    assert tree.include?(92)
+    assert tree.include?(50)
+    refute tree.include?(1000)
+  end
+
+  def test_max_method
+    tree = BinarySearchTree.new
+    tree.insert(61, "Bill & Ted's Excellent Adventure")
+    tree.insert(16, "Johnny English")
+    tree.insert(92, "Sharknado 3")
+    tree.insert(50, "Hannibal Buress: Animal Furnace")
+
+    assert_instance_of Node, tree.max
+    assert_equal 92, tree.max.score
+    assert_equal "Sharknado 3", tree.max.title
+
+    tree.insert(99, "The Goonies")
+    assert_equal 99, tree.max.score
+    assert_equal "The Goonies", tree.max.title
+  end
 end

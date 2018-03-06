@@ -16,7 +16,7 @@ class Node
     elsif score > @score
       @right.nil? ? @right = Node.new(score, title) : @right.insert(score, title)
     else
-      false
+      nil
     end
   end
 end
