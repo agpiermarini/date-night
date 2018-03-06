@@ -105,4 +105,20 @@ class BinarySearchTreeTest < Minitest::Test
     assert_equal 4, tree.min.score
     assert_equal "Jaws: The Revenge", tree.min.title
   end
+
+  def test_sort_method
+    tree = BinarySearchTree.new
+    tree.insert(61, "Bill & Ted's Excellent Adventure")
+    tree.insert(16, "Johnny English")
+    tree.insert(92, "Sharknado 3")
+    tree.insert(50, "Hannibal Buress: Animal Furnace")
+
+    expected = [{"Johnny English"=>16},
+                {"Hannibal Buress: Animal Furnace"=>50},
+                {"Bill & Ted's Excellent Adventure"=>61},
+                {"Sharknado 3"=>92}]
+
+    assert_instance_of Array, tree.sort
+    assert_equal expected, tree.sort
+  end
 end

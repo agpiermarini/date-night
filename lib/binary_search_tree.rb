@@ -59,6 +59,14 @@ class BinarySearchTree
     end
   end
 
+  # def max(node = @root)
+  #   node.right.nil? ? node : max(node.right)
+  # end
+
+  # def min(node = @root)
+  #   node.left.nil? ? node : min(node.left)
+  # end
+
   def max
     node = @root
     loop do
@@ -73,5 +81,20 @@ class BinarySearchTree
       return node if node.left.nil?
       node = node.left
     end
+  end
+
+  def find_by_score(score, node = @root)
+    loop do
+      return node if score == node.score
+      score < node.score ? (node = node.left) : (node = node.right)
+      return nil if node.nil?
+    end
+  end
+
+  def sort
+    (1..100).map do |score|
+      node = find_by_score(score)
+      node.nil? ? nil : { node.title => node.score }
+    end.compact
   end
 end
