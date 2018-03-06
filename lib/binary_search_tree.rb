@@ -66,4 +66,12 @@ class BinarySearchTree
       node = node.right
     end
   end
+
+  def min
+    node = @root
+    loop do
+      return node if node.left.nil?
+      node = node.left
+    end
+  end
 end

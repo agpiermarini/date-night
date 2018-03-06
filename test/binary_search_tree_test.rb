@@ -89,4 +89,20 @@ class BinarySearchTreeTest < Minitest::Test
     assert_equal 99, tree.max.score
     assert_equal "The Goonies", tree.max.title
   end
+
+  def test_min_method
+    tree = BinarySearchTree.new
+    tree.insert(61, "Bill & Ted's Excellent Adventure")
+    tree.insert(16, "Johnny English")
+    tree.insert(92, "Sharknado 3")
+    tree.insert(50, "Hannibal Buress: Animal Furnace")
+
+    assert_instance_of Node, tree.min
+    assert_equal 16, tree.min.score
+    assert_equal "Johnny English", tree.min.title
+
+    tree.insert(4, "Jaws: The Revenge")
+    assert_equal 4, tree.min.score
+    assert_equal "Jaws: The Revenge", tree.min.title
+  end
 end
