@@ -126,5 +126,11 @@ class BinarySearchTreeTest < Minitest::Test
     tree = BinarySearchTree.new
 
     assert_equal 100, tree.load('./data/movies.txt')
+    assert_equal 100, tree.max.score
+    assert_equal "The Little Engine That Could", tree.max.title
+    assert_equal 0, tree.min.score
+    assert_equal "Cruel Intentions", tree.min.title
+    assert tree.include?(25)
+    assert tree.include?(72)
   end
 end

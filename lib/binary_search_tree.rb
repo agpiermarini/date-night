@@ -107,7 +107,7 @@ class BinarySearchTree
     movies = parse_txt(file)
     movies.each do |movie|
       score, title = movie.split(", ")
-      insert(score, title.strip)
+      insert(score.to_i, title.strip)
     end
     movies.length
   end
