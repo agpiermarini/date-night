@@ -19,19 +19,17 @@ class BinarySearchTree
     depth = 0
     until score == node.score
       depth += 1
-      score < node.score ? (node = node.left) : (node = node.right)
+      node = score < node.score ? node.left : node.right
       return nil if node.nil?
     end
     depth
   end
 
-  def include?(score)
-    node = @root
-    loop do
-      return true if score == node.score
-      score < node.score ? (node = node.left) : (node = node.right)
-      return false if node.nil?
-    end
+  def include?(score, node = @root)
+    return false if node.nil?
+    return true if score == node.score
+    node = score < node.score ? node.left : node.right
+    include?(score, node)
   end
 
   def max(node = @root)
@@ -42,13 +40,10 @@ class BinarySearchTree
     node.left.nil? ? node : min(node.left)
   end
 
-  def find_by_score(score)
-    node = @root
-    loop do
-      return node if score == node.score
-      score < node.score ? (node = node.left) : (node = node.right)
-      return nil if node.nil?
-    end
+  def find_by_score(score, node = @root)
+    return node if node.nil? || score == node.score
+    node = score < node.score ? node.left : node.right
+    find_by_score(score, node)
   end
 
   def sort
@@ -110,5 +105,23 @@ end
 #   loop do
 #     return node if node.left.nil?
 #     node = node.left
+#   end
+# end
+#
+# def find_by_score(score)
+#   node = @root
+#   loop do
+#     return node if score == node.score
+#     score < node.score ? (node = node.left) : (node = node.right)
+#     return nil if node.nil?
+#   end
+# end
+# 
+# def include?(score)
+#   node = @root
+#   loop do
+#     return true if score == node.score
+#     score < node.score ? (node = node.left) : (node = node.right)
+#     return false if node.nil?
 #   end
 # end
