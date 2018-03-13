@@ -34,20 +34,12 @@ class BinarySearchTree
     end
   end
 
-  def max
-    node = @root
-    loop do
-      return node if node.right.nil?
-      node = node.right
-    end
+  def max(node = @root)
+    node.right.nil? ? node : max(node.right)
   end
 
-  def min
-    node = @root
-    loop do
-      return node if node.left.nil?
-      node = node.left
-    end
+  def min(node = @root)
+    node.left.nil? ? node : min(node.left)
   end
 
   def find_by_score(score)
@@ -104,11 +96,19 @@ end
 #   end
 #   depth_of(score)
 # end
-
-# def max(node = @root)
-#   node.right.nil? ? node : max(node.right)
+#
+# def max
+#   node = @root
+#   loop do
+#     return node if node.right.nil?
+#     node = node.right
+#   end
 # end
-
-# def min(node = @root)
-#   node.left.nil? ? node : min(node.left)
+#
+# def min
+#   node = @root
+#   loop do
+#     return node if node.left.nil?
+#     node = node.left
+#   end
 # end
