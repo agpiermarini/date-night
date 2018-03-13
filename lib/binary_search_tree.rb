@@ -14,8 +14,7 @@ class BinarySearchTree
     depth_of(score)
   end
 
-  def depth_of(score)
-    node = @root
+  def depth_of(score, node = @root)
     depth = 0
     until score == node.score
       depth += 1
@@ -116,7 +115,7 @@ end
 #     return nil if node.nil?
 #   end
 # end
-# 
+#
 # def include?(score)
 #   node = @root
 #   loop do
